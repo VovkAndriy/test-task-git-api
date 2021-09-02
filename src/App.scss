@@ -1,0 +1,44 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+img {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+}
+
+input {
+  width: 50%;
+  height: 50px;
+  font-size: 24px;
+}
+
+.table__container {
+  padding: 1rem;
+  table {
+    border-spacing: 0;
+    border: 1px solid #34bdeb;
+
+    tr {
+      :last-child {
+        td {
+          border-bottom: 0;
+        }
+      }
+    }
+
+    th,
+    td {
+      margin: 0;
+      padding: 1.5rem;
+      border-bottom: 1px solid #34bdeb;
+      border-right: 1px solid #34bdeb;
+
+      :last-child {
+        border-right: 0;
+      }
+    }
+  }
+}

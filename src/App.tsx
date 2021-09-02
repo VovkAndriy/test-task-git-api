@@ -1,26 +1,57 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import * as React from "react";
+import "./App.scss";
+import Table from './components/Table';
+import {useEffect, useState} from 'react';
+import {Api} from './api';
 
-function App() {
+export default function App() {
+  
+  const [repos, setRepos] = useState([]);
+
+  useEffect(() => {
+	Api().getRepos().then(data => setRepos(data));
+  }, []);
+
+  const columns = React.useMemo(
+	() => [
+		  {
+			Header: 'Owner photo',
+			accessor: 'owner.avatar_url',
+			Cell: ({ value }: {value: string}) => {
+			  return (
+				<img alt="Owner photo" src={value} />
+			  );
+			},
+		  },
+		  {
+			Header: 'Owner',
+			accessor: 'owner.login',
+		  },
+		  {
+			Header: 'Repo',
+			accessor: 'full_name',
+		  },
+		  {
+			Header: 'Repo url',
+			accessor: 'html_url',
+			Cell: ({ value }: {value: string}) => {
+			  return (
+				<a href={value} >{value}</a>
+			  );
+			},
+		  },
+		  {
+			Header: 'Repo description',
+			accessor: 'description',
+		  },
+	],
+	[]
+  )
+  
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+	<div className="table__container">
+	  <Table columns={columns} data={repos} />
+	</div>
   );
 }
-
-export default App;
