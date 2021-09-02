@@ -33,7 +33,7 @@ const Table = ({ columns, data }: { columns: Array<Column>; data: Array<any>}) =
   
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 	const value = e.target.value || undefined;
-	setFilter("full_name", value); // Update the show.name filter. Now our table will filter and show only the rows which have a matching value
+	setFilter("full_name", value);
 	setSearchInput(value);
   };
   
